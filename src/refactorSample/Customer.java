@@ -5,9 +5,6 @@ import java.util.Vector;
 public class Customer {
 	private Vector<Rental> rentals = new Vector<Rental>();
 
-	public Customer() {
-	}
-	
 	public void addRental(Rental newRental) {
 		rentals.add(newRental);
 	}
@@ -18,37 +15,22 @@ public class Customer {
 		int bonusPoints = 0;
 
 		for(Rental rent:rentals) {
-			int lineAmount = 0;
+			bonusPoints += rent.getBonus();
+		}
 
-			switch(rent.getMovie().getPriceCode()) {
-				case Movie.REGULAR:
-					lineAmount += 2000;
-					if(rent.getDaysRented() > 2) {
-						lineAmount += (rent.getDaysRented() - 2) * 1500;
-					}
-					break;
-				case Movie.CLASSIC:
-					lineAmount += 1500;
-					if(rent.getDaysRented() > 3) {
-						lineAmount += (rent.getDaysRented() - 3) * 1500;
-					}
-					break;
-				case Movie.RELEASE:
-					lineAmount += (rent.getDaysRented() * 3000);
-					break;
-			}
-			bonusPoints++;
-			if((rent.getMovie().getPriceCode() == Movie.RELEASE)
-				&& (rent.getDaysRented() > 1)) bonusPoints++;
-			
-			rentalList += rent.getMovie().getName() + "\t" + String.valueOf(lineAmount) + "\n";			
+		for(Rental rent:rentals) {
+			int lineAmount = rent.getAmount();
 			totalAmount += lineAmount;
+		}
+			
+		for(Rental rent:rentals) {
+			rentalList += rent.getMovie().getName() + "\t" + String.valueOf(rent.getAmount()) + "\n";			
 		}
 		rentalList += "Total\t" + String.valueOf(totalAmount) + "\n";
 		rentalList += "Bonus Point:\t" + String.valueOf(bonusPoints) + "\n";
 		return rentalList;
 	}
-	
+
 	public static void main(String[] args) {
 		Customer me = new Customer();
 		System.out.println(me.statement());
