@@ -3,19 +3,13 @@ package refactorSample;
 import java.util.Vector;
 
 public class Customer {
-	private String name;
 	private Vector<Rental> rentals = new Vector<Rental>();
 
-	public Customer(String name) {
-		this.name = name;
+	public Customer() {
 	}
 	
 	public void addRental(Rental newRental) {
 		rentals.add(newRental);
-	}
-
-	public String getNmae() {
-		return this.name;
 	}
 	
 	public String statement() {
@@ -56,7 +50,7 @@ public class Customer {
 	}
 	
 	public static void main(String[] args) {
-		Customer me = new Customer("DO");
+		Customer me = new Customer();
 		System.out.println(me.statement());
 	}
 }
