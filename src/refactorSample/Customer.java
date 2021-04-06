@@ -11,24 +11,33 @@ public class Customer {
 	
 	public String statement() {
 		String rentalList = "Statement\n";
-		int totalAmount = 0;
-		int bonusPoints = 0;
 
-		for(Rental rent:rentals) {
-			bonusPoints += rent.getBonus();
-		}
-
-		for(Rental rent:rentals) {
-			int lineAmount = rent.getAmount();
-			totalAmount += lineAmount;
-		}
+		int totalAmount = getTotalAmount();
+		int bonusPoints = getTotalBonusPoints();
 			
 		for(Rental rent:rentals) {
 			rentalList += rent.getMovie().getName() + "\t" + String.valueOf(rent.getAmount()) + "\n";			
 		}
+
 		rentalList += "Total\t" + String.valueOf(totalAmount) + "\n";
 		rentalList += "Bonus Point:\t" + String.valueOf(bonusPoints) + "\n";
 		return rentalList;
+	}
+
+	private int getTotalBonusPoints() {
+		int bonusPoints = 0;
+		for(Rental rent:rentals) {
+			bonusPoints += rent.getBonus();
+		}
+		return bonusPoints;
+	}
+
+	private int getTotalAmount() {
+		int totalAmount = 0;
+		for(Rental rent:rentals) {
+			totalAmount += rent.getAmount();
+		}
+		return totalAmount;
 	}
 
 	public static void main(String[] args) {
