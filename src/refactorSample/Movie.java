@@ -1,17 +1,13 @@
 package refactorSample;
 
 public class Movie {
-	public static final int REGULAR = 0;
-	public static final int CLASSIC = 1;
-	public static final int RELEASE = 2;
-
 	private String name;
-	private int priceCode;
+	private PriceCode priceCode;
 	
 	public Movie() {
 	}
 
-	public Movie(String name, int priceCode) {
+	public Movie(String name, PriceCode priceCode) {
 		this.name = name;
 		this.priceCode = priceCode;
 	}
@@ -20,11 +16,19 @@ public class Movie {
 		return this.name;
 	}
 
-	public int getPriceCode() {
+	public PriceCode getPriceCode() {
 		return this.priceCode;
 	}
 	
-	public void setPriceCode(int priceCode) {
+	public void setPriceCode(PriceCode priceCode) {
 		this.priceCode = priceCode;
+	}
+
+	int getLineAmount(int days) {
+		return priceCode.getAmount(days);
+	}
+
+	int getBonusPoints(int days) {
+		return priceCode.getBonusPoints(days);
 	}
 }
